@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      
+ lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Users Page</title>
+    <style>
+        table th, table td {
+            padding: 10px 5px;
+            font-family: sans-serif;
+            font-size: 14px;
+            border-style: solid;
+            border-width: 1px;
+            background: ivory;
+        }
+        button {
+            padding: 5px;
+            background-color: chartreuse;
+        }
+        .buttonDelete {
+            background: #fd3434;
+            color: white;
+        }
+        .buttonEdit {
+            background: gold;
+            position: relative;
+            left: 50%;
+            transform: translate(-50%, 0);
+        }
+    </style>
+</head>
+<body>
+<h1>User List</h1>
+<button onclick="window.location.href = '/new';">Add new user</button>
+<br>
+<br>
+    <table border="2">
+        <tr>
+            <th th:width="80">ID</th>
+            <th th:width="120">Name</th>
+            <th th:width="120">LastName</th>
+            <th th:width="120">Profession</th>
+            <th th:width="120">Salary(USD)</th>
+            <th th:width="60">Edit</th>
+            <th th:width="60">Delete</th>
+        </tr>
+
+        <tr th:each="user : ${listUsers}">
+            <td><a th:href="@{'get?id=' + ${user.getId()}}" th:utext="${user.getId()}"></a></td>
+            <td th:utext="${user.getName()}"></td>
+            <td th:utext="${user.getLastName()}"></td>
+            <td th:utext="${user.getProfession()}"></td>
+            <td th:utext="${user.getSalary()}"></td>
+            <td><a th:href="@{'edit/get?id=' + ${user.getId()}}">Edit</a>
+            </td>
+            <td>
+                 <form th:method="DELETE" th:action="@{'delete?id=' + ${user.getId()}}" th:object="${user}">
+                     <input type="submit" class="buttonDelete" value="Delete"/>
+                 </form>
+            </td>
+        </tr>
+    </table>
+<br/>
+<br/>
+</body>
+</html>
