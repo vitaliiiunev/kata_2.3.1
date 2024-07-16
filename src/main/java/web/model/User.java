@@ -1,5 +1,4 @@
 package web.model;
-import org.intellij.lang.annotations.Pattern;
 
 import javax.persistence.*;
 

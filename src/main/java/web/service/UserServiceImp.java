@@ -4,35 +4,34 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import web.dao.UserDao;
 import web.model.User;
-
 import javax.transaction.Transactional;
-import java.beans.Transient;
 import java.util.List;
 
 @Service
 public class UserServiceImp implements UserService {
 
+    private final UserDao userDao;
+
     @Autowired
-    private UserDao userDao;
+    public UserServiceImp(UserDao userDao) {
+        this.userDao = userDao;
+    }
 
     @Transactional
     @Override
     public void addUser(User user) {
-
         userDao.addUser(user);
     }
 
     @Transactional
     @Override
     public void updateUser(User user) {
-
         userDao.updateUser(user);
     }
 
     @Transactional
     @Override
     public void removeUser(int id) {
-
         userDao.removeUser(id);
     }
 
